@@ -5,7 +5,6 @@
 
 using namespace std;
 
-// void organizePlates(int *plates);
 
 int main() {
 
@@ -20,8 +19,12 @@ int main() {
         cin >> plates[i][0] >> plates[i][1] >> plates[i][2];
     }
 
+    organizePlates(plates);
+
     return 0;
 }
 
 
-//void organizePlates(int *plates) {}
+void organizePlates(int **plates) {
+
+}
