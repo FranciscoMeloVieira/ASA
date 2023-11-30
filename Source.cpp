@@ -1,10 +1,13 @@
 #include <iostream>
 
+#include "Plate.h"
+
 
 #define NUMBER_PLATE_PARAMETER 3
 
 using namespace std;
 
+void organizePlates(Plate plateList[]);
 
 int main() {
 
@@ -13,18 +16,30 @@ int main() {
     cin >> plateWidth >> plateLength;
     cin >> numberPlates;
 
-    int plates[numberPlates][NUMBER_PLATE_PARAMETER];
-
+    Plate plateList[numberPlates];
+    
     for (int i = 0; i < numberPlates; i++) {
-        cin >> plates[i][0] >> plates[i][1] >> plates[i][2];
+        int length, width, price;
+
+        cin >> length >> width >> price;
+
+        Plate newPlate(length, width, price);
+        plateList[i] = newPlate;
+        
     }
 
-    organizePlates(plates);
+    organizePlates(plateList);
 
+    /*
+    for (int i = 0; i < numberPlates; i++) {
+        plateList[i].printPlate();
+    }
+    */ 
+   
     return 0;
 }
 
 
-void organizePlates(int **plates) {
+void organizePlates(Plate plateList[]) {
 
 }
