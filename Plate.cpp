@@ -15,6 +15,14 @@ int Plate::getPrice() {
     return (this->price);
 }
 
+int Plate::getWidth() {
+    return (this->width);
+}
+
+int Plate::getLength() {
+    return (this->length);
+}
+
 /*
 void Plate::printPlate() {
     std::cout << this->length << this->width << this->price;

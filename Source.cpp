@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include "Plate.h"
+#include "algorithm.h"
 
 
 #define NUMBER_PLATE_PARAMETER 3
@@ -29,6 +30,10 @@ int main() {
     }
 
     organizePlates(plateList, numberPlates);
+    
+    int price = algorithm(plateList, plateWidth, plateLength);
+
+    cout << price;
 
     /*
     for (int i = 0; i < numberPlates; i++) {

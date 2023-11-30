@@ -10,5 +10,9 @@ class Plate {
 
         int getPrice();
 
+        int getWidth();
+
+        int getLength();
+
         //void printPlate();
 };
