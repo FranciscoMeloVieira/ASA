@@ -31,7 +31,7 @@ int main() {
 
     organizePlates(plateList, numberPlates);
     
-    int price = algorithm(plateList, numberPlates, plateWidth, plateLength);
+    int price = algorithm(plateList, numberPlates, plateLength, plateWidth);
 
     cout << price << "\n";
 

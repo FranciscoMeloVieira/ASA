@@ -14,5 +14,7 @@ class Plate {
 
         int getLength();
 
+        bool samePlate(int length, int width);
+
         //void printPlate();
 };

@@ -23,6 +23,14 @@ int Plate::getLength() {
     return (this->length);
 }
 
+bool Plate::samePlate(int length, int width) {
+    if ((this->length == length && this->width == width) || (this->length == width && this->width == length)) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
 /*
 void Plate::printPlate() {
     std::cout << this->length << this->width << this->price;

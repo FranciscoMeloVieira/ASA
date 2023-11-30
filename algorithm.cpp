@@ -1,4 +1,5 @@
 #include "Plate.h"
+#include <stdio.h>
 
 int verticalCut(int width, int length, int cut, Plate plateList[], int numberPlates);
 
@@ -10,15 +11,19 @@ int algorithm(Plate plateList[], int numberPlates, int width, int length) {
 
     price = verticalPrice = 0;
 
+    if (width <= 0 || length <= 0) {
+        return (price);
+    }
 
-    for (int i = 0; i <= length; i++) {
+
+    for (int i = 0; i <= length / 2; i++) {
         verticalPrice =  verticalCut(width, length, i, plateList, numberPlates);
         
         if (verticalPrice > price) {
             price = verticalPrice;
         }
     }
-
+    //printf("fim algoritmo\n");
     return (price);
 }
 
@@ -26,6 +31,8 @@ int verticalCut(int width, int length, int cut, Plate plateList[], int numberPla
 
     int smallPrice, bigPrice;
     int tempSmallPrice, tempBigPrice;
+
+    printf("%d cut vertical\n", cut);
 
     int smallPlate[2], bigPlate[2];
 
@@ -35,8 +42,9 @@ int verticalCut(int width, int length, int cut, Plate plateList[], int numberPla
     smallPlate[0] = cut;
     bigPlate[0] = length - cut;
     smallPlate[1] = bigPlate[1] = width;
-
-    for (int i = 0; i <= width; i++) {
+    //printf("%d width\n", width);
+    
+    for (int i = 0; i <= width / 2; i++) {
         tempSmallPrice = horizontalCut(smallPlate, plateList, i, numberPlates);
         tempBigPrice = horizontalCut(bigPlate, plateList, i, numberPlates);
 
@@ -53,31 +61,31 @@ int verticalCut(int width, int length, int cut, Plate plateList[], int numberPla
 
 int horizontalCut(int plate[2], Plate plateList[], int cut, int numberPlates) {
 
-    int smallPrice, bigPrice;
     int smallPlate[2], bigPlate[2];
-
-    smallPrice = bigPrice = 0;
+    int price;
 
     smallPlate[0] = bigPlate[0] = plate[0];
     smallPlate[1] = cut;
     bigPlate[1] = plate[1] - cut;
 
+    price = 0;
+
     for (int i = 0; i <= numberPlates; i++) {
-        if ((plateList[i].getLength() == smallPlate[0] && plateList[i].getWidth() == smallPlate[1]) || 
-        (plateList[i].getLength() == smallPlate[1] && plateList[i].getWidth() == smallPlate[0])) {
-            smallPrice = plateList[i].getPrice() + algorithm(plateList, numberPlates, bigPlate[1], bigPlate[0]);
+        if (plateList[i].samePlate(smallPlate[0],smallPlate[1])) {
+            price += plateList[i].getPrice();
             break;
         }
     }
-
     for (int i = 0; i <= numberPlates; i++) {
-        if ((plateList[i].getLength() == bigPlate[0] && plateList[i].getWidth() == bigPlate[1]) || 
-        (plateList[i].getLength() == bigPlate[1] && plateList[i].getWidth() == bigPlate[0])) {
-            bigPrice = plateList[i].getPrice() +  algorithm(plateList, numberPlates, smallPlate[1], smallPlate[0]);
-            break;
+        if (plateList[i].samePlate(bigPlate[0],bigPlate[1])) {
+        price += plateList[i].getPrice();
+        break;
         }
     }
 
-    return (smallPrice + bigPrice);
-    
+    if (bigPlate[0] > 0 && bigPlate[1] > 0) {
+        price += algorithm(plateList, numberPlates, bigPlate[1], bigPlate[0]);
+    }
+
+    return (price);
 }
