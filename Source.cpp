@@ -9,8 +9,6 @@ using namespace std;
 
 void organizePlates(Plate plateList[], int numberPlates);
 
-int comparePlate(Plate p1, Plate p2);
-
 int main() {
 
     int plateWidth, plateLength, numberPlates;
@@ -41,10 +39,12 @@ int main() {
     return 0;
 }
 
-int comparePlate(Plate p1, Plate p2) {
-    return (p1.getPrice - p2.getPrice);
+int comparePlate(const void* p1, const void* p2) {
+    Plate a = *(Plate*) p1;
+    Plate b = *(Plate*) p2;
+    return (b.getPrice() - a.getPrice());
 }
 
 void organizePlates(Plate plateList[], int numberPlates) {
-    qsort(*plateList, numberPlates, sizeof(Plate), comparePlate);
+    qsort(plateList, numberPlates, sizeof(Plate), comparePlate);
 }
