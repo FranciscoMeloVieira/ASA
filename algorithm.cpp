@@ -70,6 +70,13 @@ int horizontalCut(int plate[2], Plate plateList[], int cut, int numberPlates) {
         }
     }
 
+    for (int i = 0; i <= numberPlates; i++) {
+        if ((plateList[i].getLength() == bigPlate[0] && plateList[i].getWidth() == bigPlate[1]) || 
+        (plateList[i].getLength() == bigPlate[1] && plateList[i].getWidth() == bigPlate[0])) {
+            bigPrice = plateList[i].getPrice() +  algorithm(plateList, numberPlates, bigPlate[1], bigPlate[0]);
+            break;
+        }
+    }
 
     return (smallPrice + bigPrice);
     
