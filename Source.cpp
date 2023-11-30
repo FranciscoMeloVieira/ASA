@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "Plate.h"
+
 #include "algorithm.h"
 
 
