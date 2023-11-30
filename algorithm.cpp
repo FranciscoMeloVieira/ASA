@@ -11,7 +11,7 @@ int algorithm(Plate plateList[], int numberPlates, int width, int length) {
     price = verticalPrice = 0;
 
 
-    for (int i = 0; i <= length / 2; i++) {
+    for (int i = 0; i <= length; i++) {
         verticalPrice =  verticalCut(width, length, i, plateList, numberPlates);
         
         if (verticalPrice > price) {
@@ -36,7 +36,7 @@ int verticalCut(int width, int length, int cut, Plate plateList[], int numberPla
     bigPlate[0] = length - cut;
     smallPlate[1] = bigPlate[1] = width;
 
-    for (int i = 0; i <= width / 2; i++) {
+    for (int i = 0; i <= width; i++) {
         tempSmallPrice = horizontalCut(smallPlate, plateList, i, numberPlates);
         tempBigPrice = horizontalCut(bigPlate, plateList, i, numberPlates);
 
@@ -73,7 +73,7 @@ int horizontalCut(int plate[2], Plate plateList[], int cut, int numberPlates) {
     for (int i = 0; i <= numberPlates; i++) {
         if ((plateList[i].getLength() == bigPlate[0] && plateList[i].getWidth() == bigPlate[1]) || 
         (plateList[i].getLength() == bigPlate[1] && plateList[i].getWidth() == bigPlate[0])) {
-            bigPrice = plateList[i].getPrice() +  algorithm(plateList, numberPlates, bigPlate[1], bigPlate[0]);
+            bigPrice = plateList[i].getPrice() +  algorithm(plateList, numberPlates, smallPlate[1], smallPlate[0]);
             break;
         }
     }
