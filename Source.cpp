@@ -7,7 +7,9 @@
 
 using namespace std;
 
-void organizePlates(Plate plateList[]);
+void organizePlates(Plate plateList[], int numberPlates);
+
+int comparePlate(Plate p1, Plate p2);
 
 int main() {
 
@@ -28,7 +30,7 @@ int main() {
         
     }
 
-    organizePlates(plateList);
+    organizePlates(plateList, numberPlates);
 
     /*
     for (int i = 0; i < numberPlates; i++) {
@@ -39,7 +41,10 @@ int main() {
     return 0;
 }
 
+int comparePlate(Plate p1, Plate p2) {
+    return (p1.getPrice - p2.getPrice);
+}
 
-void organizePlates(Plate plateList[]) {
-
+void organizePlates(Plate plateList[], int numberPlates) {
+    qsort(*plateList, numberPlates, sizeof(Plate), comparePlate);
 }

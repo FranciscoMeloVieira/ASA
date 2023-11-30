@@ -11,8 +11,8 @@ Plate::Plate(int length, int width, int price) {
     this->price = price;
 }
 
-double Plate::getProfit() {
-    return ((length * width) / price);
+int Plate::getPrice() {
+    return (this->price);
 }
 
 /*
@@ -20,5 +20,7 @@ void Plate::printPlate() {
     std::cout << this->length << this->width << this->price;
 }
 */
+
+
 
 

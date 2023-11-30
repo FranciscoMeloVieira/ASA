@@ -8,7 +8,7 @@ class Plate {
         
         Plate(int length, int width, int price);
 
-        double getProfit();
+        int getPrice();
 
         //void printPlate();
 };
