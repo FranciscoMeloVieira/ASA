@@ -9,7 +9,11 @@ private:
     int length, width, price;
 
 public:
-    // Construtor para inicializar a placa com valores específicos.
+    /* Construtor para inicializar a placa com valores específicos.
+    * @param l Comprimento da placa.
+    * @param w Largura da placa.
+    * @param p Preço da placa.
+    */
     Plate(int l, int w, int p) : length(l), width(w), price(p) {}
 
     // Métodos para obter as propriedades da placa.
@@ -18,16 +22,25 @@ public:
     int getLength() const { return length; }
 };
 
-// Função principal do algoritmo que calcula o preço máximo possível.
+/* Função principal do algoritmo que calcula o preço máximo possível.
+* @param plateList Lista de placas disponíveis.
+* @param maxWidth Largura máxima considerada da placa a ser cortada.
+* @param maxLength Comprimento máximo considerado da placa a ser cortada.
+*/
 int algorithm(const vector<Plate>& plateList, int maxWidth, int maxLength) {
-    // Tabela de programação dinâmica para armazenar os preços máximos.
+    /* Tabela de programação dinâmica para armazenar os preços máximos.
+    * Cria uma tabela com todos os tamanhos possíveis de placas que cabem na placa maior, e inicializa com preço 0.
+    */
     vector<vector<int>> dp(maxWidth + 1, vector<int>(maxLength + 1, 0));
 
     // Pré-processamento para estabelecer os preços máximos para cada tamanho de placa.
     for (const auto& plate : plateList) {
+        //Verifica se a placa do cliente cabe na placa maior.
         if (plate.getWidth() <= maxWidth && plate.getLength() <= maxLength) {
+            //Compara o preço da placa já presente na tabela com a placa do cliente, e substitui o preço caso seja menor.
             dp[plate.getWidth()][plate.getLength()] = max(dp[plate.getWidth()][plate.getLength()], plate.getPrice());
         }
+        //Repete o mesmo processo, mas vira a placa.
         if (plate.getWidth() != plate.getLength() && plate.getLength() <= maxWidth && plate.getWidth() <= maxLength) {
             dp[plate.getLength()][plate.getWidth()] = max(dp[plate.getLength()][plate.getWidth()], plate.getPrice());
         }
@@ -50,17 +63,21 @@ int algorithm(const vector<Plate>& plateList, int maxWidth, int maxLength) {
 
 // Função principal que lê os dados de entrada e executa o algoritmo.
 int main() {
+
     int plateWidth, plateLength, numberPlates;
-    cin >> plateWidth >> plateLength >> numberPlates;
+
+    cin >> plateWidth >> plateLength >> numberPlates; // Lê os dados de entrada.
 
     vector<Plate> vecPlateList;
+
+    // Lê os dados de cada placa e armazena-os num vetor de objetos Plate.
     for (int i = 0; i < numberPlates; ++i) {
         int length, width, price;
         cin >> length >> width >> price;
         vecPlateList.emplace_back(length, width, price);
     }
 
-    int price = algorithm(vecPlateList, plateWidth, plateLength);
+    int price = algorithm(vecPlateList, plateWidth, plateLength); //Roda o algoritmo para calcular o preço máximo.
     cout << price << "\n"; // Exibe o preço máximo.
     return 0;
 }
